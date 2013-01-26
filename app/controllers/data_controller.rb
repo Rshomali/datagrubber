@@ -31,11 +31,18 @@ class DataController < ApplicationController
     response  = HTTParty.get("http://dia.offsetdesign.co.uk/api/paygap?lat=#{latitude}&long=#{longtitude}")
     paygap_data = JSON.parse(response.body)
 
+    #
+    # get example data
+    #
+    response  = HTTParty.get("http://dia.offsetdesign.co.uk/api/example?lat=#{latitude}&long=#{longtitude}")
+    example_data = JSON.parse(response.body)
+
     data = {  :location   => location_data,
               :datasets   => [
                               crime_data,
                               living_data,
-                              paygap_data
+                              paygap_data,
+                              example_data
                             ]
           }
 
