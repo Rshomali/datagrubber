@@ -14,11 +14,27 @@ class DataController < ApplicationController
     crime_data = JSON.parse(response.body)
 
     #
-    # get 
+    # get living data
     #
+    response  = HTTParty.get('http://dia.offsetdesign.co.uk/api/living?lat=xxx&long=yyy')
+    living_data = JSON.parse(response.body)
+
+    #
+    # get pay gap data
+    #
+    response  = HTTParty.get('http://dia.offsetdesign.co.uk/api/paygap?lat=xxx&long=yyy')
+    paygap_data = JSON.parse(response.body)
+
+    data = { :title => "Shoreditch"
+             :datasets => [
+                            crime_data,
+                            living_data,
+                            paygap_data
+                          ]
+          }
 
     respond_to do |format|
-      format.json { render :json => data.merge(crime_data) }
+      format.json { render :json => data }
     end
   end
 end
