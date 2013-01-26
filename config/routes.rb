@@ -1,4 +1,9 @@
 Datagrubber::Application.routes.draw do
+
+  scope '/api' do
+    match 'data' => 'data#index'
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
